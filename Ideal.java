@@ -5,7 +5,7 @@ public class Ideal implements Comparable<Ideal> {
 	/*Milliseconds from the counting (1st second of 1970 Greenwich)
 	  to the glorious change of millennium: 01/01/2000.
 	  In the class Date, month starts at 0 and year=1900+parameter*/
-	private static long m=new java.util.Date(100,0,1).getTime();
+	private static long m=new Date(100,0,1).getTime();
 	//If the year has or not 1 week more
 	public static int days(int y) {
 		return y==Math.round(Math.round(y*1.242189/7)*7/1.242189)?371:364;
