@@ -1,4 +1,3 @@
-package a;
 import java.util.Date;
 @SuppressWarnings({"deprecation","preview"})
 public class Ideal implements Comparable<Ideal> {
@@ -18,11 +17,11 @@ public class Ideal implements Comparable<Ideal> {
 		this(System.currentTimeMillis());
 	}
 	//From Gregorian to ideal calendar
-	public Ideal(Date g) {
-		this(g.getTime());
-	}
 	public Ideal(long g) {
 		addDays((int)((g-m)/86400000));
+	}
+	public Ideal(Date g) {
+		this(g.getTime());
 	}
 	//Year and day.
 	//If d>days(y), days pass to some posterior year.
@@ -65,7 +64,7 @@ public class Ideal implements Comparable<Ideal> {
 	}
 	public boolean equals(Object o) {
 		if(this==o) return true;
-		if(o instanceof Date d) return D==new Ideal(d).D;
+		if(o instanceof Integer i) return D==i;
 		if(o instanceof Ideal i) return D==i.D;
 		return false;
 	}
@@ -75,8 +74,11 @@ public class Ideal implements Comparable<Ideal> {
 		return (f==null?d:get(f?5:6)+" "+get(f?2:3))+" "+y;
 	}
 	//Ideal calendar to Gregorian from milliseconds.
+	public long g() {
+		return (long)D*86400000+m;
+	}
 	public Date gregorian() {
-		return new Date((long)D*86400000+m);
+		return new Date(g());
 	}
 	public Ideal clone() {
 		return new Ideal(y,d);
