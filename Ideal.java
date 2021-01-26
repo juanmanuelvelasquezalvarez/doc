@@ -1,3 +1,4 @@
+package a;
 import java.util.Date;
 @SuppressWarnings({"deprecation","preview"})
 public class Ideal implements Comparable<Ideal> {
@@ -23,15 +24,9 @@ public class Ideal implements Comparable<Ideal> {
 	public Ideal(Date g) {
 		this(g.getTime());
 	}
-	//Year and day.
-	//If d>days(y), days pass to some posterior year.
-	//If d<1, days pass to some previous year.
+	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
 	public Ideal(int y, int d) {
 		addYears(y-2000);addDays(d-7);
-	}
-	//Year, month or week according to the boolean and day
-	public Ideal(int y, int m, int d, boolean b) {
-		this(y,(m-1)*(b?28:7)+d);
 	}
 	public void addDays(int n) {
 		d+=n;
