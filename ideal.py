@@ -17,6 +17,7 @@ class ideal:
 			#If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
 			self.addDays(d-7)
 	def addDays(self,n):
+		if not isinstance(n, int): return NotImplemented
 		self._d+=n
 		if n>0:
 			N=days(self._y)
