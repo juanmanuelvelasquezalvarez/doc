@@ -47,17 +47,17 @@ class Ideal {
 			case 'm': return floor($this->d/28)+1;
 			case 'w': return floor($this->d/7)+1;
 			case 'd': return $this->d;
+			case 'D': return $this->D;
 			case 'dm': return $this->d%28+1;
 			case 'dw': return $this->d%7+1;
+			case 'g':
+				//Ideal calendar to Gregorian.
+				$g=date_create("2000-01-01");
+				date_add($g,date_interval_create_from_date_string($this->D.' days'));
+				return $g;
 		}
 		return 0;
 	}
-	//Ideal calendar to Gregorian.
-	public function gregorian() {
-		$g=date_create("2000-01-01");
-		date_add($g,date_interval_create_from_date_string($this->D.' days'));
-		return $g;
-	}
 }
 $i=new Ideal((int)date("U"));
-echo date_format($i->gregorian(),"Y/m/d").'<br>'.$i->dm." ".$i->m." ".$i->y;
+echo date_format($i->g,"Y/m/d").'<br>'.$i->dm." ".$i->m." ".$i->y.'<br>';
