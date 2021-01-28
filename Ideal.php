@@ -50,11 +50,8 @@ class Ideal {
 			case 'D': return $this->D;
 			case 'dm': return $this->d%28+1;
 			case 'dw': return $this->d%7+1;
-			case 'g':
-				//Ideal calendar to Gregorian.
-				$g=date_create("2000-01-01");
-				date_add($g,date_interval_create_from_date_string($this->D.' days'));
-				return $g;
+			//Ideal calendar to Gregorian.
+			case 'g': return date_add(date_create("2000-01-01"),date_interval_create_from_date_string($this->D.' days'));
 		}
 		return 0;
 	}
