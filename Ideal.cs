@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace Ideal
 {
 	class Ideal
@@ -10,9 +10,9 @@ namespace Ideal
 			d = 6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 		//The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
 		public Ideal()
-        	{
-		AddDays((int)DateTime.Now.Subtract(DateTime.Parse("2000-01-01")).TotalDays);
-        	}
+		{
+			AddDays((int)DateTime.Now.Subtract(DateTime.Parse("2000-01-01")).TotalDays);
+		}
 		//From Gregorian to ideal calendar
 		public Ideal(DateTime g)
 		{
@@ -50,8 +50,21 @@ namespace Ideal
 		}
 		//Choose among year, month, week, day of the year/month/week.
 		//Day, week and month start at 0 internally and here 1 is added.
-		public int get(int f) =>
-			f < 1 | f > 6 ? 0 : f == 1 ? y : (f == 2 ? d / 28 : f == 3 ? d / 7 : f == 4 ? d : f == 5 ? d % 28 : d % 7) + 1;
+		public static byte f=2;
+		public override string ToString()
+		{
+			if (f<2|f==4|f>6) return d + " " + y;
+			string s=" " + y;
+			byte b = f;
+			if (b > 4) f -= 3;
+			s = " "+(int)this+s;
+			if (b < 4) f += 3;
+			s = (int)this+s;
+			f = b;
+			return s;
+		}
+		public static explicit operator int(Ideal i) =>
+			f < 1 | f > 6 ? 0 : f == 1 ? i.y : (f == 2 ? i.d / 28 : f == 3 ? i.d / 7 : f == 4 ? i.d : f == 5 ? i.d % 28 : i.d % 7) + 1;
 		//If this date is previous or posterior than another.
 		public static bool operator >(Ideal a, Ideal b) => a.D > b.D;
 		public static bool operator <(Ideal a, Ideal b) => a.D < b.D;
@@ -62,14 +75,6 @@ namespace Ideal
 		//From ideal to Gregorian calendar
 		public static explicit operator DateTime(Ideal i) => DateTime.Parse("2000-01-01").AddDays(i.D);
 		public static explicit operator string(Ideal i) => i.ToString();
-		//Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
-		public bool? f = true;
-		public override string ToString()
-		{
-			if (f == null) return d + " " + y;
-			bool b = (bool)f;
-			return (get(b ? 5 : 6) + " " + get(b ? 2 : 3)) + " " + y;
-		}
 		static void Main(string[] args)
 		{
 			Console.WriteLine(/*(DateTime)*/new Ideal());
