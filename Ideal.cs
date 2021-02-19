@@ -59,6 +59,9 @@ namespace Ideal
 		public static bool operator !=(Ideal a, Ideal b) => a.D != b.D;
 		public static bool operator ==(Ideal a, int b) => a.D == b;
 		public static bool operator !=(Ideal a, int b) => a.D != b;
+		//From ideal to Gregorian calendar
+		public static explicit operator DateTime(Ideal i) => DateTime.Parse("2000-01-01").AddDays(i.D);
+		public static explicit operator string(Ideal i) => i.ToString();
 		//Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 		public bool? f = true;
 		public override string ToString()
@@ -67,10 +70,9 @@ namespace Ideal
 			bool b = (bool)f;
 			return (get(b ? 5 : 6) + " " + get(b ? 2 : 3)) + " " + y;
 		}
-		public DateTime gregorian() => DateTime.Parse("2000-01-01").AddDays(D);
 		static void Main(string[] args)
 		{
-			Console.WriteLine(new Ideal());
+			Console.WriteLine(/*(DateTime)*/new Ideal());
 		}
 		public override bool Equals(object o) => this==(Ideal)o;
 		public override int GetHashCode() => base.GetHashCode();
