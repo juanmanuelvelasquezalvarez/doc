@@ -2,7 +2,7 @@
 namespace Ideal
 {
 	class Ideal
-    {
+    	{
 		//If the year has or not 1 week more
 		public static int days(int y) => y == Math.Round(Math.Round(y * 1.242189 / 7) * 7 / 1.242189) ? 371 : 364;
 		private int D,//Days since the change of millennium initiating in 0.
@@ -10,9 +10,9 @@ namespace Ideal
 			d = 6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 		//The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
 		public Ideal()
-        {
-			AddDays((int)DateTime.Now.Subtract(DateTime.Parse("2000-01-01")).TotalDays);
-        }
+        	{
+		AddDays((int)DateTime.Now.Subtract(DateTime.Parse("2000-01-01")).TotalDays);
+        	}
 		//From Gregorian to ideal calendar
 		public Ideal(DateTime g)
 		{
