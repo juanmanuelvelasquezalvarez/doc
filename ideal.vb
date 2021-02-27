@@ -6,8 +6,8 @@ Function days(y As Long) As Integer
         days = 364
     End If
 End Function
-'Date as number in Excel and version
-Function ideal(f As Long, v As Integer) As String
+'Gregorian to ideal
+Function ideal(f As Long) As Long
     Dim n, d, m As Integer
     Dim y As Long
     'Days since the glorious change of millennium
@@ -27,20 +27,10 @@ Function ideal(f As Long, v As Integer) As String
             d = d + days(y)
         Wend
     End If
-    ideal = ""
-    'Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
-    If v = 1 Then
-        m = 28
-    ElseIf v = 2 Then
-        m = 7
-    End If
-    If v = 1 Or v = 2 Then
-        ideal = ((d Mod m) + 1) & " " & (Round(d / m) + 1) & " " & y
-    ElseIf v = 3 Then
-        ideal = d & " " & y
-    End If
+    'Day starts at 0 internally and here 1 is added.
+    ideal = y * 1000 + d + 1
 End Function
-'Year and day
+'Ideal to gregorian. Year and day
 Function gregorian(d As Integer, y As Long) As Long
     'The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
     'Day of the year counting since 0 (Sunday). 6 is Saturday, day that the change of millennium was.
@@ -59,4 +49,18 @@ Function gregorian(d As Integer, y As Long) As Long
             gregorian = gregorian - days(i)
         Wend
     End If
+End Function
+'Parameter day of the year
+Function weekideal(d As Integer) As Single
+    weekideal = Round((d - 1) / 7) + 1
+End Function
+Function monthideal(d As Integer) As Single
+    monthideal = Round((d - 1) / 28) + 1
+End Function
+'Day of week and of month
+Function dwideal(d As Integer) As Single
+    dwideal = ((d - 1) Mod 7) + 1
+End Function
+Function dmideal(d As Integer) As Single
+    dmideal = ((d - 1) Mod 7) + 1
 End Function
