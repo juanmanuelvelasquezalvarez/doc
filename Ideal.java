@@ -66,7 +66,7 @@ public class Ideal implements Comparable<Ideal> {
 	//Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 	public Boolean f=true;
 	public String toString() {
-		return (f==null?d:get(f?5:6)+" "+get(f?2:3))+" "+y;
+		return (f==null?d+1:get(f?5:6)+" "+get(f?2:3))+" "+y;
 	}
 	//Ideal calendar to Gregorian from milliseconds.
 	public long g() {
