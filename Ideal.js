@@ -52,7 +52,7 @@ class Ideal {
 	}
 	//Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 	string(f) {
-		return (f==null?this.d:this.get(f?5:6)+" "+this.get(f?2:3))+" "+this.y;
+		return (f==null?this.d+1:this.get(f?5:6)+" "+this.get(f?2:3))+" "+this.y;
 	}
 	//Ideal calendar to Gregorian from milliseconds.
 	gregorian() {
