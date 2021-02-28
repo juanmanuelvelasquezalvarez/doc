@@ -6,14 +6,14 @@ Function days(y As Long) As Integer
         days = 364
     End If
 End Function
-'Gregorian to ideal
+'Gregorian to ideal yyyyddd
 Function ideal(f As Long) As Long
-    Dim n, d, m As Integer
+    Dim n, d As Integer
     Dim y As Long
     'Days since the glorious change of millennium
-    '36526 days from 1900 to 2000 in Excel
     d = f - 36520
     y = 2000 'Year initiating in 2000
+    '36526 days from 1900 to 2000 in Excel
     If f > 36526 Then
         n = days(y)
         While d >= n
@@ -27,7 +27,7 @@ Function ideal(f As Long) As Long
             d = d + days(y)
         Wend
     End If
-    'Day starts at 0 internally and here 1 is added.
+    'Day starts at 0 internally and here 1 is added
     ideal = y * 1000 + d + 1
 End Function
 'Ideal to gregorian. Year and day
@@ -51,16 +51,16 @@ Function gregorian(d As Integer, y As Long) As Long
     End If
 End Function
 'Parameter day of the year
-Function weekideal(d As Integer) As Single
-    weekideal = Round((d - 1) / 7) + 1
+Function weekideal(d As Integer) As Integer
+    weekideal = ((d - 1) / 7) + 1
 End Function
-Function monthideal(d As Integer) As Single
-    monthideal = Round((d - 1) / 28) + 1
+Function monthideal(d As Integer) As Integer
+    monthideal = ((d - 1) / 28) + 1
 End Function
 'Day of week and of month
-Function dwideal(d As Integer) As Single
+Function dwideal(d As Integer) As Integer
     dwideal = ((d - 1) Mod 7) + 1
 End Function
-Function dmideal(d As Integer) As Single
-    dmideal = ((d - 1) Mod 7) + 1
+Function dmideal(d As Integer) As Integer
+    dmideal = ((d - 1) Mod 28) + 1
 End Function
