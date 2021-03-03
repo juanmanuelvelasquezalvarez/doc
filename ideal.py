@@ -1,5 +1,5 @@
 import time
-from datetime import datetime
+from datetime import datetime, date
 #If the year has or not 1 week more
 def days(y): return 371 if y==round(round(y*1.242189/7)*7/1.242189) else 364
 #Milliseconds from the counting to the glorious change of millennium: 01/01/2000.
@@ -89,5 +89,5 @@ class ideal:
 	#Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 	def __str__(self): return (str(self._d) if f==None else str(self.dm if f else self.dw)+" "+str(self.m if f else self.w))+" "+str(self._y)
 	#Ideal calendar to Gregorian from milliseconds.
-	def gregorian(self): return datetime.fromtimestamp(self._D*86400+ts)
+	def gregorian(self): return date.fromtimestamp(self._D*86400+ts)
 print(ideal())
