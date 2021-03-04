@@ -54,13 +54,16 @@ class ideal:
 	@property
 	def w(self): return int(self._d/7)+1
 	@property
-	def d(self): return self._d
+	def d(self): return self._d+1
 	@property
 	def dm(self): return self._d%28+1
 	@property
 	def dw(self): return self._d%7+1
 	@property
 	def D(self): return self._D
+	#Ideal calendar to Gregorian from milliseconds.
+	@property
+	def gregorian(self): return date.fromtimestamp(self._D*86400+ts)
 	def __eq__(self, o):
 		if self==o: return True
 		if isinstance(o, int): return self._D==o
@@ -88,6 +91,4 @@ class ideal:
 		return False
 	#Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 	def __str__(self): return (str(self._d) if f==None else str(self.dm if f else self.dw)+" "+str(self.m if f else self.w))+" "+str(self._y)
-	#Ideal calendar to Gregorian from milliseconds.
-	def gregorian(self): return date.fromtimestamp(self._D*86400+ts)
 print(ideal())
