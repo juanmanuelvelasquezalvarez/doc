@@ -87,4 +87,4 @@ class ideal:
 		return False
 	#Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 	def __str__(self): return (str(self._d) if f==None else str(self.dm if f else self.dw)+" "+str(self.m if f else self.w))+" "+str(self._y)
-print(ideal().gregorian)#Now
+print(ideal())#Now
