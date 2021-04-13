@@ -8,15 +8,8 @@ class Ideal {
 	private $y=2000;//Year initiating in 2000
 	private $d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 	//The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
-	//Gregorian, year and day
-	//If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
-	public function __construct($g, $y=2000, $d=7) {
-		try { 
-			$this->addDays(($g-(int)date("U",mktime(0,0,0,1,1,2000)))/86400);
-		}catch(Exception $e) {
-			$this->addYears($y-2000);
-			$this->addDays($d-7);
-		}
+	public function __construct($g=null) {
+		$this->addDays(((int)($g==null?date("U"):$g)-(int)date("U",mktime(0,0,0,1,1,2000)))/86400);
 	}
 	public function addDays(int $n) {
 		$this->d+=$n;
@@ -56,5 +49,5 @@ class Ideal {
 		return 0;
 	}
 }
-$i=new Ideal((int)date("U"));
+$i=new Ideal();//Now
 echo date_format($i->g,"Y/m/d").'<br>'.$i->dm." ".$i->m." ".$i->y.'<br>';
