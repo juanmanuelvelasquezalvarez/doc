@@ -13,17 +13,11 @@ function days(y) {
 }
 class Ideal {
 	//The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
-	//From Gregorian to ideal calendar
-	constructor(g) {//Now
+	constructor(g) {//From Gregorian to ideal calendar
 		this.D=0;//Days since the change of millennium initiating in 0.
 		this.y=2000;//Year initiating in 2000
 		this.d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 		this.addDays((g-m)/86400000);
-	}
-	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
-	set(y,d) {
-		this.addYears(y-this.y);
-		this.addDays(d-this.d-1);
 	}
 	addDays(n) {
 		this.d+=n;
@@ -59,7 +53,7 @@ class Ideal {
 		return new Date(D*86400000+m);
 	}
 }
-document.getElementsByTagName("p")[0].innerHTML = new Ideal(new Date().getTime()).string(true);
+document.getElementsByTagName("p")[0].innerHTML = new Ideal(new Date().getTime()).string(true);//Now
 //</script>
 //</body>
 //</html>
