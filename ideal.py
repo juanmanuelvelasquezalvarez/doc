@@ -7,15 +7,11 @@ def days(y): return 371 if y==round(round(y*1.242189/7)*7/1.242189) else 364
 ts=datetime(2000, 1, 1).timestamp()
 f=True
 class ideal:
-	def __init__(self, y=None, d=1, g=time.time()):
+	def __init__(self, g=None):
 		self._D=0#Days since the change of millennium
 		self._y=2000#Year initiating in 2000
 		self._d=6#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
-		if y is None: self.addDays(int((g-ts)/86400))#From Gregorian to ideal calendar
-		else:
-			self.addYears(y-2000)
-			#If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
-			self.addDays(d-7)
+		self.addDays(int(((time.time() if g is None else g)-ts)/86400))#From Gregorian to ideal calendar
 	def addDays(self,n):
 		if not isinstance(n, int): return NotImplemented
 		self._d+=n
@@ -91,4 +87,4 @@ class ideal:
 		return False
 	#Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 	def __str__(self): return (str(self._d) if f==None else str(self.dm if f else self.dw)+" "+str(self.m if f else self.w))+" "+str(self._y)
-print(ideal())
+print(ideal().gregorian)#Now
