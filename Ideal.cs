@@ -48,8 +48,6 @@ namespace Ideal
 			if (n > 0) while (y < a) D += days(y++);
 			if (n < 0) while (y > a) D -= days(--y);
 		}
-		//Choose among year, month, week, day of the year/month/week.
-		//Day, week and month start at 0 internally and here 1 is added.
 		public static byte f=2;
 		public override string ToString()
 		{
@@ -63,6 +61,8 @@ namespace Ideal
 			f = b;
 			return s;
 		}
+		//Choose among year, month, week, day of the year/month/week.
+		//Day, week and month start at 0 internally and here 1 is added.
 		public static explicit operator int(Ideal i) =>
 			f < 1 | f > 6 ? 0 : f == 1 ? i.y : (f == 2 ? i.d / 28 : f == 3 ? i.d / 7 : f == 4 ? i.d : f == 5 ? i.d % 28 : i.d % 7) + 1;
 		//If this date is previous or posterior than another.
