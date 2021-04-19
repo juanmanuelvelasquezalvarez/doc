@@ -52,16 +52,16 @@ class Ideal
 		end
 	end
     def <=>(o)
-        return self.D<=>o.D
+        self.D<=>o.D
     end
     def >(o)
-        return self.D>o.D
+        self.D>o.D
     end
     def <(o)
-        return self.D<o.D
+        self.D<o.D
     end
     def ==(o)
-        return self.D==o.D
+        self.D==o.D
     end
 	#Day, week and month start at 0 internally and here 1 is added.
 	def y
