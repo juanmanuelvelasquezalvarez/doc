@@ -53,6 +53,9 @@ class Ideal {
 		}
 		return 0;
 	}
+	public $f=true;
+	public function __toString() {
+		return ($this->f instanceof bool)?$this->d:(($this->f?$this->dm:$this->dw)." ".($this->f?$this->m:$this->w))." ".$this->y;
+	}
 }
-$i=new Ideal();//Now
-echo date_format($i->g,"Y/m/d").'<br>'.$i->dm." ".$i->m." ".$i->y.'<br>';
+echo new Ideal();//Now
