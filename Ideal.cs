@@ -2,7 +2,7 @@ using System;
 namespace Ideal
 {
 	class Ideal
-    {
+    	{
 		//If the year has or not 1 week more
 		public static int days(int y) => y == Math.Round(Math.Round(y * 1.242189 / 7) * 7 / 1.242189) ? 371 : 364;
 		private int D,//Days since the change of millennium initiating in 0.
