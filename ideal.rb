@@ -12,8 +12,7 @@ class Ideal
 		@D=0#Days since the change of millennium
 		@y=2000#Year initiating in 2000
 		@d=6#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
-		n=(g-Time.local(2000, 1, 1))/86400
-		addDays(n.floor)#From Gregorian to ideal calendar
+		addDays(((g-Time.local(2000, 1, 1))/86400).floor)#From Gregorian to ideal calendar
 	end
 	def addDays(n)
 		@d+=n
