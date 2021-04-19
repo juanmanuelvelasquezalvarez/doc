@@ -19,6 +19,10 @@ class Ideal {
 		this.d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 		this.addDays((g-m)/86400000);
 	}
+	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	set(y,d) {
+		addYears(y-this.y);addDays(d-this.d);
+	}
 	addDays(n) {
 		this.d+=n;
 		if(n>0) {
