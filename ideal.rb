@@ -7,7 +7,6 @@ end
 class Ideal
     include Comparable
     attr_accessor:D
-	@@f = true
 	def initialize(g=Time.new)
 		@D=0#Days since the change of millennium
 		@y=2000#Year initiating in 2000
@@ -93,6 +92,7 @@ class Ideal
 	def gregorian
 		Time.new(2000,1,1)+@D*86400
 	end
+	@@f = true
 	def to_s
 		"#{(@@f!=true and @@f!=false) ? d : "#{@@f ? dm : dw} #{@@f ? m : w} "}#{y}"
 	end
