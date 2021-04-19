@@ -2,7 +2,7 @@ using System;
 namespace Ideal
 {
 	class Ideal
-    	{
+    {
 		//If the year has or not 1 week more
 		public static int days(int y) => y == Math.Round(Math.Round(y * 1.242189 / 7) * 7 / 1.242189) ? 371 : 364;
 		private int D,//Days since the change of millennium initiating in 0.
@@ -10,9 +10,9 @@ namespace Ideal
 			d = 6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 		//The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
 		public Ideal()
-		{
+        {
 			AddDays((int)DateTime.Now.Subtract(DateTime.Parse("2000-01-01")).TotalDays);
-		}
+        }
 		//From Gregorian to ideal calendar
 		public Ideal(DateTime g)
 		{
@@ -48,23 +48,18 @@ namespace Ideal
 			if (n > 0) while (y < a) D += days(y++);
 			if (n < 0) while (y > a) D -= days(--y);
 		}
-		public static byte f=2;
+		public static bool? f;
 		public override string ToString()
 		{
-			if (f<2|f==4|f>6) return d + " " + y;
-			string s=" " + y;
-			byte b = f;
-			if (b > 4) f -= 3;
-			s = " "+(int)this+s;
-			if (b < 4) f += 3;
-			s = (int)this+s;
-			f = b;
-			return s;
+			if(f==null) return (d + 1) + " " + y;
+			bool b = (bool)f;
+			return (b?5:6)+" "+get(b?2:3)+" "+y;
 		}
 		//Choose among year, month, week, day of the year/month/week.
 		//Day, week and month start at 0 internally and here 1 is added.
-		public static explicit operator int(Ideal i) =>
-			f < 1 | f > 6 ? 0 : f == 1 ? i.y : (f == 2 ? i.d / 28 : f == 3 ? i.d / 7 : f == 4 ? i.d : f == 5 ? i.d % 28 : i.d % 7) + 1;
+		public int get(int f) =>
+			f < 1 | f > 6 ? 0 : f == 1 ? y : (f == 2 ? d / 28 : f == 3 ? d / 7 : f == 4 ? d : f == 5 ? d % 28 : d % 7) + 1;
+		public static explicit operator int(Ideal i) => i.D;
 		//If this date is previous or posterior than another.
 		public static bool operator >(Ideal a, Ideal b) => a.D > b.D;
 		public static bool operator <(Ideal a, Ideal b) => a.D < b.D;
