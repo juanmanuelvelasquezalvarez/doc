@@ -21,7 +21,7 @@ class Ideal {
 	}
 	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
 	set(y,d) {
-		addYears(y-this.y);addDays(d-this.d);
+		addYears(y-this.y);addDays(d-this.d-1);
 	}
 	addDays(n) {
 		this.d+=n;
