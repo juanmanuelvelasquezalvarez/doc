@@ -12,6 +12,10 @@ class ideal:
 		self._y=2000#Year initiating in 2000
 		self._d=6#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
 		self.addDays(int(((time.time() if g is None else g)-ts)/86400))#From Gregorian to ideal calendar
+	#Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	def set(self, y, d):
+		self.addYears(y-self._y)
+		self.addDays(d-self._d)
 	def addDays(self,n):
 		if not isinstance(n, int): return NotImplemented
 		self._d+=n
