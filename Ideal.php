@@ -11,6 +11,11 @@ class Ideal {
 	public function __construct($g=null) {
 		$this->addDays(((int)($g==null?date("U"):$g)-(int)date("U",mktime(0,0,0,1,1,2000)))/86400);
 	}
+	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	public function set(int $y, int $d) {
+		$this->addYears($y-$this->y);
+		$this->addDays($d-$this->d);
+	}
 	public function addDays(int $n) {
 		$this->d+=$n;
 		if($n>0) {
