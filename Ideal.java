@@ -51,7 +51,7 @@ public class Ideal implements Comparable<Ideal> {
 	//Choose among year, month, week, day of the year/month/week.
 	//Day, week and month start at 0 internally and here 1 is added.
 	public int get(int f) {
-		return f<1|f>6?0:f==1?y:(f==2?d/28:f==3?d/7:f==4?d:f==5?d%28:d%7)+1;
+		return f<1|f>7?0:f==1?y:f==7?D:(f==2?d/28:f==3?d/7:f==4?d:f==5?d%28:d%7)+1;
 	}
 	//If this date is previous or posterior than another.
 	public int compareTo(Ideal f) {
