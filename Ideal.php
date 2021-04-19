@@ -14,7 +14,7 @@ class Ideal {
 	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
 	public function set(int $y, int $d) {
 		$this->addYears($y-$this->y);
-		$this->addDays($d-$this->d);
+		$this->addDays($d-$this->d-1);
 	}
 	public function addDays(int $n) {
 		$this->d+=$n;
