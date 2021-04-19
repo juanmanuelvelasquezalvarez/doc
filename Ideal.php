@@ -55,7 +55,7 @@ class Ideal {
 	}
 	public static $f=true;
 	public function __toString() {
-		return (self::$f instanceof bool)?$this->d:((self::$f?$this->dm:$this->dw)." ".(self::$f?$this->m:$this->w))." ".$this->y;
+		return (self::$f instanceof bool)?($this->d+1):((self::$f?$this->dm:$this->dw)." ".(self::$f?$this->m:$this->w))." ".$this->y;
 	}
 }
 echo new Ideal();//Now
