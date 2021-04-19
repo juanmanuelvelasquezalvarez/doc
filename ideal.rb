@@ -15,9 +15,10 @@ class Ideal
 		addDays(((g-Time.local(2000, 1, 1))/86400).floor)#From Gregorian to ideal calendar
 	end
 	#Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
-	def set(self, y, d):
-		self.addYears(y-self._y)
-		self.addDays(d-self._d-1)
+	def set(y,d)
+		addYears(y-@y)
+		addDays(d-@d-1)
+	end
 	def addDays(n)
 		@d+=n
 		if n>0
@@ -93,7 +94,7 @@ class Ideal
 		Time.new(2000,1,1)+@D*86400
 	end
 	def to_s
-		"#{y}#{@@f=nil ? d : " #{@@f ? m : w} #{@@f ? dm : dw}"}"
+		"#{(@@f!=true and @@f!=false) ? d : "#{@@f ? dm : dw} #{@@f ? m : w} "}#{y}"
 	end
 end
 puts Ideal.new
