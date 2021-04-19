@@ -1,8 +1,3 @@
-//<!DOCTYPE html>
-//<html>
-//<body>
-//<p></p>
-//<script>
 /*Milliseconds from the counting (1st second of 1970 Greenwich)
 to the glorious change of millennium: 01/01/2000.
 In the class Date, month starts at 0*/
@@ -47,11 +42,11 @@ class Ideal {
 	//Choose among year, month, week, day of the year/month/week.
 	//Day, week and month start at 0 internally and here 1 is added.
 	get(f) {
-		return f<1|f>6?0:f==1?y:Math.floor(f==2?this.d/28:f==3?this.d/7:f==4?this.d:f==5?this.d%28:this.d%7)+1;
+		return f<1|f>7?0:f==1?y:f==7?D:Math.floor(f==2?this.d/28:f==3?this.d/7:f==4?this.d:f==5?this.d%28:this.d%7)+1;
 	}
 	//Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 	string(f) {
-		return (f==null?this.d+1:this.get(f?5:6)+" "+this.get(f?2:3))+" "+this.y;
+		return ((typeof f)!="boolean"?this.d+1:this.get(f?5:6)+" "+this.get(f?2:3))+" "+this.y;
 	}
 	//Ideal calendar to Gregorian from milliseconds.
 	gregorian() {
@@ -59,6 +54,3 @@ class Ideal {
 	}
 }
 document.getElementsByTagName("p")[0].innerHTML = new Ideal().string(true);//Now
-//</script>
-//</body>
-//</html>
