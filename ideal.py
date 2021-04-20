@@ -10,37 +10,8 @@ class ideal:
 	def __init__(self, g=None):
 		self._D=0#Days since the change of millennium
 		self._y=2000#Year initiating in 2000
-		self._d=6#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
-		self.addDays(int(((time.time() if g is None else g)-ts)/86400))#From Gregorian to ideal calendar
-	def addDays(self,n):
-		if not isinstance(n, int): return NotImplemented
-		self._d+=n
-		if n>0:
-			N=days(self._y)
-			while self._d>=N:
-				self._d-=N
-				self._y+=1
-				N=days(self._y)
-		else:
-			while self._d<0:
-				self._y-=1
-				self._d+=days(self._y)
-		self._D+=n
-	def addYears(self,n):
-		if not isinstance(n, int): return NotImplemented
-		a=self._y+n
-		if self._d>363:
-			if days(a)==364:
-				self._d-=7
-				self._D-=7
-		if n>0:
-			while self._y<a:
-				self._D+=days(self._y)
-				self._y+=1
-		if n<0:
-			while self._y>a:
-				self._y-=1
-				self._D-=days(self._y)
+		self._d=0#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
+		self.d=6+int(((time.time() if g is None else g)-ts)/86400)#From Gregorian to ideal calendar
 	#Choose among year, month, week, day of the year/month/week.
 	#Day, week and month start at 0 internally and here 1 is added.
 	@property
@@ -50,7 +21,7 @@ class ideal:
 	@property
 	def w(self): return int(self._d/7)+1
 	@property
-	def d(self): return self._d+1
+	def d(self): return self._d
 	@property
 	def dm(self): return self._d%28+1
 	@property
@@ -60,11 +31,33 @@ class ideal:
 	#Ideal calendar to Gregorian from milliseconds.
 	@property
 	def gregorian(self): return date.fromtimestamp(self._D*86400+ts)
-	#Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	#If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
 	@d.setter
-	def d(self,v): self.addDays(v-self._d-1)
+	def d(self,n):
+		if not isinstance(n, int): return NotImplemented
+		self._D+=n-self._d
+		self._d=n
+		N=days(self._y)
+		while self._d>=N:
+			self._d-=N
+			self._y+=1
+			N=days(self._y)
+		while self._d<0:
+			self._y-=1
+			self._d+=days(self._y)
 	@y.setter
-	def y(self,v): self.addYears(v-self._y)
+	def y(self,n):
+		if not isinstance(n, int): return NotImplemented
+		if self._d>363:
+			if days(n)==364:
+				self._d-=7
+				self._D-=7
+		while self._y<n:
+			self._D+=days(self._y)
+			self._y+=1
+		while self._y>n:
+			self._y-=1
+			self._D-=days(self._y)
 	def __eq__(self, o):
 		if self==o: return True
 		if isinstance(o, int): return self._D==o
@@ -91,5 +84,5 @@ class ideal:
 		if isinstance(o, ideal): return self._D>o.D
 		return False
 	#Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
-	def __str__(self): return (str(self.d) if not isinstance(f, bool) else str(self.dm if f else self.dw)+" "+str(self.m if f else self.w))+" "+str(self._y)
+	def __str__(self): return (str(self.d+1) if not isinstance(f, bool) else str(self.dm if f else self.dw)+" "+str(self.m if f else self.w))+" "+str(self.y)
 print(ideal())#Now
