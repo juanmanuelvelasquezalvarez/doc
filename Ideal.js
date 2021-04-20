@@ -11,33 +11,27 @@ class Ideal {
 	constructor(g) {//From Gregorian to ideal calendar
 		this.D=0;//Days since the change of millennium initiating in 0.
 		this.y=2000;//Year initiating in 2000
-		this.d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
+		this.d=0;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 		if(g==null | (typeof g)!="number" & (typeof g)!="Date") g=new Date().getTime()
-		this.addDays((((typeof g)=="Date"?g.getTime():g)-m)/86400000);
+		this.setD(6+(((typeof g)=="Date"?g.getTime():g)-m)/86400000);
 	}
-	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
-	set(y,d) {
-		addYears(y-this.y);addDays(d-this.d-1);
-	}
-	addDays(n) {
-		this.d+=n;
-		if(n>0) {
-			var N=days(this.y);
-			while(this.d>=N) {
-				this.d-=N;
-				N=days(++this.y);
-			}
+	//If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	setD(n) {
+		this.D+=n-this.d;
+		this.d=n;
+		var N=days(this.y);
+		while(this.d>=N) {
+			this.d-=N;
+			N=days(++this.y);
 		}
-		else while(this.d<0) this.d+=days(--this.y);
-		this.D+=n;
+		while(this.d<0) this.d+=days(--this.y);
 	}
-	addYears(n) {
-		var a=this.y+n;
-		if(d>363) if(days(a)==364) {
+	setY(n) {
+		if(d>363) if(days(n)==364) {
 			d-=7;D-=7;
 		}
-		if(n>0) while(y<a) this.D+=days(this.y++);
-		if(n<0) while(y>a) this.D-=days(--this.y);
+		while(this.y<n) this.D+=days(this.y++);
+		while(this.y>n) this.D-=days(--this.y);
 	}
 	//Choose among year, month, week, day of the year/month/week.
 	//Day, week and month start at 0 internally and here 1 is added.
