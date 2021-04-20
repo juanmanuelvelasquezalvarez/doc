@@ -11,11 +11,6 @@ class Ideal {
 	public function __construct($g=null) {
 		$this->addDays(((int)($g==null?date("U"):$g)-(int)date("U",mktime(0,0,0,1,1,2000)))/86400);
 	}
-	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
-	public function set(int $y, int $d) {
-		$this->addYears($y-$this->y);
-		$this->addDays($d-$this->d-1);
-	}
 	public function addDays(int $n) {
 		$this->d+=$n;
 		if($n>0) {
@@ -52,6 +47,11 @@ class Ideal {
 			case 'g': return date_add(date_create("2000-01-01"),date_interval_create_from_date_string($this->D.' days'));
 		}
 		return 0;
+	}
+	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	public function __set($n,$v) {
+		if($n=='y') $this->addYears($v-$this->y);
+		else if($n=='d') $this->addDays($v-$this->d-1);
 	}
 	public static $f=true;
 	public function __toString() {
