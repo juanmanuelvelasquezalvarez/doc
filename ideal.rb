@@ -96,7 +96,7 @@ class Ideal
 	end
 	@@f = true
 	def to_s
-		"#{(@@f!=true and @@f!=false) ? d : "#{@@f ? dm : dw} #{@@f ? m : w} "}#{y}"
+		"#{(@@f!=true and @@f!=false) ? d : "#{@@f ? dm : dw} #{@@f ? m : w}"} #{y}"
 	end
 end
 puts Ideal.new
