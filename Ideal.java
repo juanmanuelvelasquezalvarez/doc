@@ -12,41 +12,38 @@ public class Ideal implements Comparable<Ideal> {
 	}
 	private int D,//Days since the change of millennium initiating in 0.
 		y=2000,//Year initiating in 2000
-		d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
+		d;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 	//The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
 	public Ideal() {//Now
 		this(System.currentTimeMillis());
 	}
 	//From Gregorian to ideal calendar
 	public Ideal(long g) {
-		addDays((int)((g-m)/86400000));
+		setD(6+(int)((g-m)/86400000));
 	}
 	public Ideal(Date g) {
 		this(g.getTime());
 	}
-	//Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
 	public Ideal(int y, int d) {
-		addYears(y-2000);addDays(d-7);
+		setY(y);setD(d);
 	}
-	public void addDays(int n) {
-		d+=n;
-		if(n>0) {
-			int N=days(y);
-			while(d>=N) {
-				d-=N;
-				N=days(++y);
-			}
+	//If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	public void setD(int n) {
+		D+=n-d;
+		d=n;
+		int N=days(y);
+		while(d>=N) {
+			d-=N;
+			N=days(++y);
 		}
-		else while(d<0) d+=days(--y);
-		D+=n;
+		while(d<0) d+=days(--y);
 	}
-	public void addYears(int n) {
-		int a=y+n;
-		if(d>363) if(days(a)==364) {
+	public void setY(int n) {
+		if(d>363) if(days(n)==364) {
 			d-=7;D-=7;
 		}
-		if(n>0) while(y<a) D+=days(y++);
-		if(n<0) while(y>a) D-=days(--y);
+		while(y<n) D+=days(y++);
+		while(y>n) D-=days(--y);
 	}
 	//Choose among year, month, week, day of the year/month/week.
 	//Day, week and month start at 0 internally and here 1 is added.
