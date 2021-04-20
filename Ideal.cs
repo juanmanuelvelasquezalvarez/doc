@@ -32,10 +32,7 @@ namespace Ideal
 				}
 				while (_d < 0) _d += days(--_y);
 			}
-            		get
-            		{
-				return _d;
-            		}
+			get => _d;
 		}
 		public int y
 		{
@@ -48,47 +45,27 @@ namespace Ideal
 				while (_y < value) D += days(_y++);
 				while (_y > value) D -= days(--_y);
 			}
-			get
-            		{
-				return _y;
-            		}
+			get => _y;
 		}
 		//Day, week and month start at 0 internally and here 1 is added.
 		public int m
-        	{
-            		get
-            		{
-				return _d / 28 + 1;
-            		}
+		{
+			get => _d / 28 + 1;
 		}
 		public int w
 		{
-			get
-			{
-				return _d / 7 + 1;
-			}
+			get => _d / 7 + 1;
 		}
 		public int dm
 		{
-			get
-			{
-				return _d % 28 + 1;
-			}
+			get => _d % 28 + 1;
 		}
 		public int dw
 		{
-			get
-			{
-				return _d % 7 + 1;
-			}
+			get => _d % 7 + 1;
 		}
-		public static bool? f=true;
-		public override string ToString()
-		{
-			if(f==null) return (_d + 1) + " " + _y;
-			bool b = (bool)f;
-			return (b?dm:dw)+" "+(b?m:w)+" "+_y;
-		}
+		public static bool b;
+		public override string ToString() => (b?dm:dw)+" "+(b?m:w)+" "+y;
 		//If this date is previous or posterior than another.
 		public static bool operator >(Ideal a, Ideal b) => a.D > b.D;
 		public static bool operator <(Ideal a, Ideal b) => a.D < b.D;
@@ -98,7 +75,7 @@ namespace Ideal
 		public static bool operator !=(Ideal a, int b) => a.D != b;
 		//From ideal to Gregorian calendar
 		public static explicit operator DateTime(Ideal i) => DateTime.Parse("2000-01-01").AddDays(i.D);
-		public static explicit operator string(Ideal i) => i.ToString();
+		public static explicit operator string(Ideal i) => (i.d+1)+" "+i.y;
 		public static explicit operator int(Ideal i) => i.D;
 		static void Main(string[] args)
 		{
