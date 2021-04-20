@@ -10,45 +10,8 @@ class Ideal
 	def initialize(g=Time.new)
 		@D=0#Days since the change of millennium
 		@y=2000#Year initiating in 2000
-		@d=6#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
-		addDays(((g-Time.local(2000, 1, 1))/86400).floor)#From Gregorian to ideal calendar
-	end
-	def addDays(n)
-		@d+=n
-		if n>0
-			a=days(@y)
-			while @d>=a
-				@d-=a
-				@y+=1
-				a=days(@y)
-			end
-		else
-			while @d<0
-				@y-=1
-				@d+=days(@y)
-			end
-		end
-		@D+=n
-	end
-	def addYears(n)
-		a=@y+n
-		if @d>363
-			if days(a)==364
-				@d-=7
-				@D-=7
-			end
-		end
-		if n>0
-			while @y<a
-				@D+=days(@y)
-				@y+=1
-			end
-		elsif n<0
-			while @y>a
-				@y-=1
-				@D-=days(@y)
-			end
-		end
+		@d#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
+		d=6+((g-Time.local(2000, 1, 1))/86400).floor#From Gregorian to ideal calendar
 	end
     def <=>(o)
         self.D<=>o.D
@@ -73,7 +36,7 @@ class Ideal
 		(@d/7)+1
 	end
 	def d
-		@d+1
+		@d
 	end
 	def dm
 		(@d%28)+1
@@ -87,16 +50,40 @@ class Ideal
 	def gregorian
 		Time.new(2000,1,1)+@D*86400
 	end
-	#Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
-	def d=(v)
-		addDays(v-@d-1)
+	#If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	def d=(n)
+		@D+=n-@d
+		@d=n
+		a=days(@y)
+		while @d>=a
+			@d-=a
+			@y+=1
+			a=days(@y)
+		end
+		while @d<0
+			@y-=1
+			@d+=days(@y)
+		end
 	end
-	def y=(v)
-		addYears(v-@y)
+	def y=(n)
+		if @d>363
+			if days(n)==364
+				@d-=7
+				@D-=7
+			end
+		end
+		while @y<n
+			@D+=days(@y)
+			@y+=1
+		end
+		while @y>n
+			@y-=1
+			@D-=days(@y)
+		end
 	end
 	@@f = true
 	def to_s
-		"#{(@@f!=true and @@f!=false) ? d : "#{@@f ? dm : dw} #{@@f ? m : w}"} #{y}"
+		"#{(@@f!=true and @@f!=false) ? d+1 : "#{@@f ? dm : dw} #{@@f ? m : w}"} #{y}"
 	end
 end
 puts Ideal.new
