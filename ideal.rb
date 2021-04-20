@@ -13,11 +13,6 @@ class Ideal
 		@d=6#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
 		addDays(((g-Time.local(2000, 1, 1))/86400).floor)#From Gregorian to ideal calendar
 	end
-	#Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
-	def set(y,d)
-		addYears(y-@y)
-		addDays(d-@d-1)
-	end
 	def addDays(n)
 		@d+=n
 		if n>0
@@ -91,6 +86,13 @@ class Ideal
 	end
 	def gregorian
 		Time.new(2000,1,1)+@D*86400
+	end
+	#Year and day. If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
+	def d=(v)
+		addDays(v-@d-1)
+	end
+	def y=(v)
+		addYears(v-@y)
 	end
 	@@f = true
 	def to_s
