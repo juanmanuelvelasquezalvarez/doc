@@ -32,10 +32,10 @@ namespace Ideal
 				}
 				while (_d < 0) _d += days(--_y);
 			}
-            get
-            {
+            		get
+            		{
 				return _d;
-            }
+            		}
 		}
 		public int y
 		{
@@ -49,17 +49,17 @@ namespace Ideal
 				while (_y > value) D -= days(--_y);
 			}
 			get
-            {
+            		{
 				return _y;
-            }
+            		}
 		}
 		//Day, week and month start at 0 internally and here 1 is added.
 		public int m
-        {
-            get
-            {
+        	{
+            		get
+            		{
 				return _d / 28 + 1;
-            }
+            		}
 		}
 		public int w
 		{
