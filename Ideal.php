@@ -3,6 +3,7 @@
 function days(int $y) {
 	return $y==round(round($y*1.242189/7)*7/1.242189)?371:364;
 }
+$b=true;
 class Ideal {
 	private $D;//Days since the change of millennium initiating in 0.
 	private $_y=2000;//Year initiating in 2000
@@ -48,9 +49,8 @@ class Ideal {
 			while($this->_y>$v) $this->D-=days(--$this->_y);
 		}
 	}
-	public static $f=true;
 	public function __toString() {
-		return ((self::$f=true|self::$f=false)?((self::$f?$this->dm:$this->dw)." ".(self::$f?$this->m:$this->w)):$this->d+1)." ".$this->y;
+		return (($b=true|$b=false)?(($b?$this->dm:$this->dw)." ".($b?$this->m:$this->w)):$this->d+1)." ".$this->y;
 	}
 }
 echo new Ideal();//Now
