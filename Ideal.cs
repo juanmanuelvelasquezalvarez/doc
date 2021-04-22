@@ -81,7 +81,7 @@ namespace Ideal
 		{
 			if(o.GetType()==typeof(Ideal)) return this==(Ideal)o;
 			if(o.GetType()==typeof(int)) return this==(int)o;
-			return true;
+			return false;
 		}
 		static void Main(string[] args)
 		{
