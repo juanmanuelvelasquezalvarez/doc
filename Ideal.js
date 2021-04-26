@@ -36,7 +36,7 @@ class Ideal {
 	//Choose among year, month, week, day of the year/month/week.
 	//Day, week and month start at 0 internally and here 1 is added.
 	get(f) {
-		return f<1|f>7?0:f==1?y:f==7?D:Math.floor(f==2?this.d/28:f==3?this.d/7:f==4?this.d:f==5?this.d%28:this.d%7)+1;
+		return f<1|f>7?0:f==1?y:f==7?D:(f<4?Math.floor(this.d/(f==2?28:7)):f==4?this.d:this.d%(f==5?28:7))+1;
 	}
 	//Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
 	string(f) {
