@@ -5,3 +5,6 @@ es.wikipedia.org/wiki/A%C3%B1o_tropical
 El archivo PNG no tiene que ver pero lo muestro. Albrecht Dürer hizo una pintura que incluye un cuadrado con los números del 1 al 16. Abajo, puso 15 y 14 indicando que la pintura es del año 1514. Cada fila y columna, cada cuadrante, las 4 esquinas, las diagonales y el cuadrado central suman 34. El cambio fue de 0 a F (15) hexadecimal y binario. La suma es 30. El 0 está con 255,0,0 (rojo) y el 1 está con 255,85,0. El 3 está con 255,255,0 (amarillo) y el 4 está con 170,255,0 y así con los otros sumando o restando 85 como el arcoíris.
 The PNG file has nothing to do but I show it. Albrecht Dürer made a painting that includes a square with numbers from 1 to 16. Below, he put 15 and 14 indicating that his painting is of the year 1514. Each row and column, each quadrant, its 4 corners, its diagonals and its central square add 34. The change was from 0 to F (15) hexadecimal and binary. The addition is 30. The 0 is with 255,0,0 (red) and the 1 is with 255,85,0. The 3 is with 255,255,0 (yellow) and the 4 is with 170,255,0 and so with the others adding or subtracting 85 like rainbow.
 Dan Brown. The lost symbol. El símbolo perdido
+
+For comments my email is juanmanuelv@une.net.co
+Para comentarios mi correo es juanmanuelv@une.net.co
