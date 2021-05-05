@@ -8,4 +8,6 @@ Cambiando de tema, Albrecht Dürer hizo una pintura que incluye un cuadrado con 
 Changing the topic, Albrecht Dürer made a painting that includes a square with numbers from 1 to 16. Below, he put 15 and 14 indicating that his painting is of the year 1514. Each row and column, each quadrant, its 4 corners, its diagonals and its central square add 34. The PNG is from 0 to F (15) hexadecimal and binary. The addition is 30. The 0 is with 255,0,0 (red) and the 1 is with 255,85,0. The 3 is with 255,255,0 (yellow) and the 4 is with 170,255,0 and so with the others adding or subtracting 85 like rainbow.
 Dan Brown. The lost symbol. El símbolo perdido
 
+Another directory github.com/juanmanuelvelasquezalvarez/Util
+
 For comments. Para comentarios. juanmanuelv@une.net.co
