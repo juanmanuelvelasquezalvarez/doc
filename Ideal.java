@@ -12,7 +12,7 @@ public class Ideal implements Comparable<Ideal> {
 	}
 	private int D,//Days since the change of millennium initiating in 0.
 		y=2000,//Year initiating in 2000
-		d;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
+		d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 	//The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
 	public Ideal() {//Now
 		this(System.currentTimeMillis());
