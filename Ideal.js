@@ -11,9 +11,9 @@ class Ideal {
 	constructor(g) {//From Gregorian to ideal calendar
 		this.D=0;//Days since the change of millennium initiating in 0.
 		this.y=2000;//Year initiating in 2000
-		this.d=0;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
+		this.d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 		if(g==null | (typeof g)!="number" & (typeof g)!="Date") g=new Date().getTime()
-		this.setD(6+(((typeof g)=="Date"?g.getTime():g)-m)/86400000);
+		this.setD(6+Math.floor((((typeof g)=="Date"?g.getTime():g)-m)/86400000));
 	}
 	//If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
 	setD(n) {
@@ -35,16 +35,11 @@ class Ideal {
 	}
 	//Choose among year, month, week, day of the year/month/week.
 	//Day, week and month start at 0 internally and here 1 is added.
-	get(f) {
-		return f<1|f>7?0:f==1?y:f==7?D:(f<4?Math.floor(this.d/(f==2?28:7)):f==4?this.d:this.d%(f==5?28:7))+1;
-	}
-	//Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
-	string(f) {
-		return ((typeof f)!="boolean"?this.d+1:this.get(f?5:6)+" "+this.get(f?2:3))+" "+this.y;
-	}
+	//Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year.
 	//Ideal calendar to Gregorian from milliseconds.
-	gregorian() {
-		return new Date(D*86400000+m);
+	get(f) {
+		return f<1|f>11?0:f==1?this.y:f<7?(f<4?Math.floor(this.d/(f==2?28:7)):f==4?this.d:this.d%(f==5?28:7))+1:f==7?this.D:
+			f==8?new Date(this.D*86400000+m):(f==9?this.d+1:this.get(f-5)+" "+this.get(f-8))+" "+this.y;
 	}
 }
-document.getElementsByTagName("p")[0].innerHTML = new Ideal().string(true);//Now
+document.getElementsByTagName("p")[0].innerHTML = new Ideal().get(10);//Now
