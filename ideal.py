@@ -10,7 +10,7 @@ class ideal:
 	def __init__(self, g=None):
 		self._D=0#Days since the change of millennium
 		self._y=2000#Year initiating in 2000
-		self._d=0#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
+		self._d=6#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
 		self.d=6+int(((time.time() if g is None else g)-ts)/86400)#From Gregorian to ideal calendar
 	#Choose among year, month, week, day of the year/month/week.
 	#Day, week and month start at 0 internally and here 1 is added.
