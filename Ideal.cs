@@ -85,7 +85,7 @@ namespace Ideal
 		}
 		static void Main(string[] args)
 		{
-			Console.WriteLine(new Ideal(DateTime.Now))
+			Console.WriteLine(new Ideal(DateTime.Now));
 		}
 	}
 }
