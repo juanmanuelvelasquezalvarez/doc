@@ -42,4 +42,4 @@ class Ideal {
 			f==8?new Date(this.D*86400000+m):(f==9?this.d+1:this.get(f-5)+" "+this.get(f-8))+" "+this.y;
 	}
 }
-document.getElementsByTagName("p")[0].innerHTML = new Ideal().get(10);//Now
+document.getElementsByTagName("p")[0].innerHTML = new Ideal().get(10)//Now
