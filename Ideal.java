@@ -76,6 +76,6 @@ public class Ideal implements Comparable<Ideal> {
 		return new Ideal(y,d);
 	}
 	public static void main(String[] a) {
-		System.out.print(new Ideal())
+		System.out.print(new Ideal());
 	}
 }
