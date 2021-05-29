@@ -11,7 +11,7 @@ var f:Boolean?=true;
 class Ideal : Comparable<Ideal> {
     private var _y: Int = 2000//Year initiating in 2000
     private var D: Int = 0//Days since the change of millennium initiating in 0.
-    private var _d: Int = 0
+    private var _d: Int = 6
     //Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
     //The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
     constructor(g: Date) {
@@ -50,6 +50,9 @@ class Ideal : Comparable<Ideal> {
     val dm: Int get()=d%28+1
     val dw: Int get()=d%7+1
     val day: Int get()=D
+    //Ideal calendar to Gregorian from milliseconds.
+    val g: Long get()=(D.toLong())*86400000+t
+    val gregorian: Date get()=Date(g)
     //Day of the year, day (1 to 28) and month or day (1 to 7) and week and the year
     override fun toString(): String {
         var s=StringBuffer()
@@ -63,16 +66,7 @@ class Ideal : Comparable<Ideal> {
 		if(o is Ideal) return D==o.D
 		return false
 	}
-    //Ideal calendar to Gregorian from milliseconds.
-    fun g(): Long {
-        return (D as Long)*86400000+m
-    }
-    fun gregorian(): Date {
-        return Date(g())
-    }
-    override fun compareTo(o: Ideal): Int {
-        return D-o.D
-    }
+    override fun compareTo(o: Ideal): Int = D-o.D
 }
 fun main() {
     print(Ideal(Date()))
