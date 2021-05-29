@@ -7,10 +7,10 @@ $b=true;
 class Ideal {
 	private $D;//Days since the change of millennium initiating in 0.
 	private $_y=2000;//Year initiating in 2000
-	private $_d;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
+	private $_d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
 	//The Gregorian 1/1/2000 would be 7/1/2000 in the ideal calendar, a standard I propose.
 	public function __construct($g=null) {
-		$this->d=6+((int)($g==null?date("U"):$g)-(int)date("U",mktime(0,0,0,1,1,2000)))/86400;
+		$this->d=6+floor((($g==null?date("U"):$g)-date("U",mktime(0,0,0,1,1,2000)))/86400);
 	}
 	//Choose among year, month, week, day of the year/month/week.
 	//Week and month start at 0 internally and here 1 is added.
@@ -24,7 +24,8 @@ class Ideal {
 			case 'dm': return $this->_d%28+1;
 			case 'dw': return $this->_d%7+1;
 			//Ideal calendar to Gregorian.
-			case 'g': return date_add(date_create("2000-01-01"),date_interval_create_from_date_string($this->D.' days'));
+			case 'g':
+				return date_add(date_create("2000-01-01"),date_interval_create_from_date_string($this->D.' days'));
 		}
 		return 0;
 	}
