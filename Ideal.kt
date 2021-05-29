@@ -61,11 +61,11 @@ class Ideal : Comparable<Ideal> {
         return s.append(' ').append(y).toString()
     }
     override fun equals(o: Any?): Boolean {
-		if(this==o) return true
-		if(o is Int) return D==o
-		if(o is Ideal) return D==o.D
-		return false
-	}
+	if(this==o) return true
+	if(o is Int) return D==o
+	if(o is Ideal) return D==o.D
+	return false
+    }
     override fun compareTo(o: Ideal): Int = D-o.D
 }
 fun main() {
