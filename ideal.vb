@@ -62,5 +62,5 @@ Function dwideal(d As Integer) As Integer
     dwideal = ((d - 1) Mod 7) + 1
 End Function
 Function dmideal(d As Integer) As Integer
-    dmideal = ((d - 1) Mod 28) + 1
+    dmideal = ((d - 1) Mod 28)
 End Function
