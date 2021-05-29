@@ -10,8 +10,8 @@ class Ideal
 	def initialize(g=Time.new)
 		@D=0#Days since the change of millennium
 		@y=2000#Year initiating in 2000
-		@d#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
-		d=6+((g-Time.local(2000, 1, 1))/86400).floor#From Gregorian to ideal calendar
+		@d=6#Day of the year counting since 0 (Sunday), 6 is Saturday, day the change of millennium was.
+		self.d=6+((g-Time.local(2000, 1, 1))/86400).floor#From Gregorian to ideal calendar
 	end
     def <=>(o)
         self.D<=>o.D
@@ -30,19 +30,19 @@ class Ideal
 		@y
 	end
 	def m
-		(@d/28)+1
+		@d/28+1
 	end
 	def w
-		(@d/7)+1
+		@d/7+1
 	end
 	def d
 		@d
 	end
 	def dm
-		(@d%28)+1
+		@d%28+1
 	end
 	def dw
-		(@d%7)+1
+		@d%7+1
 	end
 	def D
 		@D
