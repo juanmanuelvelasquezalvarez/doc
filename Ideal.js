@@ -12,7 +12,7 @@ class Ideal {
 		this.D=0;//Days since the change of millennium initiating in 0.
 		this.y=2000;//Year initiating in 2000
 		this.d=6;//Day of the year counting since 0 (Sunday), 6 is Saturday, day that the change of millennium was.
-		if(g==null | (typeof g)!="number" & (typeof g)!="Date") g=new Date().getTime()
+		if((typeof g)!="number" & (typeof g)!="Date") g=new Date().getTime()
 		this.setD(6+Math.floor((((typeof g)=="Date"?g.getTime():g)-m)/86400000));
 	}
 	//If d>days(y), days pass to some posterior year. If d<1, days pass to some previous year.
